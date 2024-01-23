@@ -1,0 +1,17 @@
+[
+  '{{repeat(48)}}',
+  {
+    "Date": '{{date(new Date(2023, 11, 4), new Date(2023, 11, 10), "YYYY-MM-dd HH:mm:ss+00:00")}}',
+    "PM2.5": '{{integer(22, 69)}}',
+    "NO2": '{{integer(30, 90)}}',
+    "Latitude":'{{46.5592}}',
+    "Longitude":'{{15.656191}}',
+    "Altitude":'{{270}}',
+    "O3":'{{0}}',
+    "PM_10":'{{integer(58,70)}}'
+  }
+]
+
+
+
+https://json-generator.com/
