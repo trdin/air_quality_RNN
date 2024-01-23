@@ -64,7 +64,7 @@ def new_variables(all_data):
     return all_data
 
 # %%
-def vaja6_predict(data):
+def predict(data):
     try:
         required_features = ['Date','Latitude', 'Longitude', 'Altitude', 'NO2', 'PM2.5', 'O3', 'PM10']
         for obj in data:
@@ -113,27 +113,12 @@ def vaja6_predict(data):
 
         normalized_data = np.column_stack([pm10_normalized, other_normalized])
 
-        X_train = normalized_data   	
-        look_back = 48
-        step = 1
+        X_predict = normalized_data   	
+       
+        X_predict = X_predict.reshape(1, X_predict.shape[1], X_predict.shape[0])
+       
 
-        #X_train, y_train = create_multivariate_dataset_with_steps(normalized_data, look_back, step)
-        #X_test, y_test = create_multivariate_dataset_with_steps(test_normalized, look_back, step)
-
-        print(X_train.shape)
-
-        X_train = X_train.reshape(1, X_train.shape[1], X_train.shape[0])
-       # X_test = X_test.reshape(X_test.shape[0], X_test.shape[2], X_test.shape[1])
-        
-        
-        
-
-        """ target_feature = 'PM10'
-        pm10_series = np.array(data[target_feature].values.reshape(-1, 1))
-
-        pm10_series = pm_10_scaler.transform(pm10_series) """
-
-        prediction = model.predict(X_train)
+        prediction = model.predict(X_predict)
         prediction =  pm_10_scaler.inverse_transform(prediction)
         
 
@@ -146,9 +131,9 @@ app = Flask(__name__)
 
 
 @app.route('/predict', methods=['POST'])
-def predict_naloga6():
+def predict_air():
     data = request.get_json()
-    result = vaja6_predict(data)
+    result = predict(data)
     return jsonify(result)
 
 
